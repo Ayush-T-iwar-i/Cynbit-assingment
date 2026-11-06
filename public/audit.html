@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>How this page was improved | Cynbit contact</title>
+  <meta name="description" content="An audit of the original Cynbit contact page and the fixes built in this prototype.">
+  <meta name="theme-color" content="#0a5c60">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230a5c60'/%3E%3Ctext x='16' y='23' font-size='20' font-weight='700' text-anchor='middle' fill='white' font-family='sans-serif'%3Ec%3C/text%3E%3C/svg%3E">
+  <script src="theme.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header"><div class="bar">
+    <a class="brand" href="/contact" aria-label="Cynbit contact page">cynbit</a>
+    <div class="actions" style="margin-left:auto"><button id="theme-toggle" class="icon-btn" type="button" aria-label="Switch to dark mode"></button></div>
+  </div></header>
+  <main class="prose">
+    <h1>How this page was improved</h1>
+    <p class="intro">I audited the contact page on cynbit.in in Chrome DevTools, on a phone-sized screen. Cynbit’s goal is to turn visitors into inquiries, so I rebuilt that path end to end.</p>
+
+    <h2>What the audit found, and what changed</h2>
+    <div class="table-wrap"><table>
+      <caption>Findings from the original site and the fix in this prototype</caption>
+      <thead><tr><th>Finding</th><th>Evidence</th><th>Fix in this prototype</th></tr></thead>
+      <tbody>
+        <tr><td>12 form fields without labels</td><td>DevTools Issues panel</td><td>Every field has a linked label, so screen readers announce it.</td></tr>
+        <tr><td>4 fields missing autocomplete</td><td>DevTools Issues panel</td><td>Name, email and organization use the right autocomplete values for one-tap autofill.</td></tr>
+        <tr><td>Hero image returning 404</td><td>Console: GET /_next/image 404</td><td>No remote images, so there is nothing to break.</td></tr>
+        <tr><td>Lazy image without dimensions</td><td>DevTools Issues panel</td><td>No layout shift: the layout does not depend on loading images.</td></tr>
+        <tr><td>108 requests on first load</td><td>Network tab, many _rsc prefetches</td><td>A small static page with a handful of requests.</td></tr>
+        <tr><td>Tiny, low-contrast labels and grey buttons</td><td>Visual review at mobile width</td><td>Labels at 15px or larger, body text at 17px, colors tuned for WCAG AA in both themes.</td></tr>
+        <tr><td>Header always on screen</td><td>Mobile view</td><td>Hides when scrolling down, returns when scrolling up.</td></tr>
+        <tr><td>Light theme only</td><td>Visual review</td><td>Dark and light themes that follow the system and remember the choice.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2>What was built</h2>
+    <ul>
+      <li>An accessible inquiry form with server-side validation, spam trap and rate limiting.</li>
+      <li>A MongoDB-backed API that stores every inquiry.</li>
+      <li>An admin dashboard with search, filters, notes, status workflow, CSV export and a 7-day trend.</li>
+      <li>AI lead triage that labels each inquiry with a category, priority and one-line summary.</li>
+      <li>A streaming support chatbot that only states verified company facts and hands off to the team otherwise.</li>
+      <li>Automated API tests and optional email notification for new leads.</li>
+    </ul>
+
+    <h2>Stack</h2>
+    <p>Node.js, Express, MongoDB with Mongoose, Claude API, and plain HTML, CSS and JavaScript. No build step, so the page loads fast and is easy to port into the Next.js site.</p>
+    <p><a class="join" href="/contact">Back to the contact page</a></p>
+  </main>
+  <script src="audit.js"></script>
+</body>
+</html>
