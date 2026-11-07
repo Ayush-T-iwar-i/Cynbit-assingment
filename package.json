@@ -3,13 +3,20 @@
   "version": "1.0.0",
   "description": "Accessible lead/quote form with Node, Express and MongoDB, plus dark mode and an admin view",
   "main": "server.js",
-  "scripts": { "start": "node server.js", "dev": "node --watch server.js" },
-  "engines": { "node": ">=18" },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test tests/api.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
   "dependencies": {
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-rate-limit": "^7.4.0",
     "helmet": "^7.1.0",
-    "mongoose": "^8.5.1"
+    "mongoose": "^8.5.1",
+    "nodemailer": "^6.10.1"
   }
 }
