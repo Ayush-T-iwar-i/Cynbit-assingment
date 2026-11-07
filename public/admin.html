@@ -3,26 +3,59 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Leads | Cynbit admin</title>
+  <title>Admin | Cynbit</title>
   <meta name="robots" content="noindex">
   <script src="theme.js"></script>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-  <header class="site-header"><a class="logo" href="/">Cynbit</a></header>
-  <main style="max-width:1000px">
-    <h1>Leads</h1>
-    <div class="field">
-      <label for="key">Admin key</label>
-      <input id="key" type="password" autocomplete="current-password">
+  <header class="site-header"><div class="bar">
+    <a class="brand" href="/contact">cynbit</a><span class="tag">Admin</span>
+    <div class="actions" style="margin-left:auto">
+      <button id="logout" class="link-btn" type="button" hidden>Sign out</button>
+      <button id="theme-toggle" class="icon-btn" type="button" aria-label="Switch to dark mode"></button>
     </div>
-    <button id="load" class="btn" type="button">Load leads</button>
-    <p id="msg" class="status" role="status"></p>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Company</th><th>Industry</th><th>Message</th><th>Status</th></tr></thead>
-        <tbody id="rows"></tbody>
-      </table>
+  </div></header>
+
+  <main class="wide">
+    <section id="login" class="login panel">
+      <h1 style="font-size:1.8rem">Admin sign in</h1>
+      <form id="login-form">
+        <div class="field"><label for="key">Admin key</label><input id="key" type="password" autocomplete="current-password" required></div>
+        <button class="btn" type="submit">Sign in</button>
+        <p id="login-msg" class="status" role="status"></p>
+      </form>
+    </section>
+
+    <div id="app" hidden>
+      <h1 style="font-size:2rem;margin:0">Dashboard</h1>
+      <div id="stats" class="stats"></div>
+      <div id="spark" class="spark" role="img"></div>
+      <div class="tabs">
+        <button type="button" data-tab="leads" aria-pressed="true">Leads</button>
+        <button type="button" data-tab="chats" aria-pressed="false">Chat conversations</button>
+      </div>
+
+      <section id="leads-panel">
+        <div class="toolbar">
+          <input id="q" type="search" placeholder="Search name, email, company, message" aria-label="Search leads">
+          <select id="filter" aria-label="Filter by status">
+            <option value="">All statuses</option><option value="new">New</option><option value="contacted">Contacted</option><option value="closed">Closed</option>
+          </select>
+          <button id="export" class="btn small" type="button">Export CSV</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Date</th><th>Name</th><th>Email</th><th>Company / industry</th><th>Status</th><th><span class="sr">Actions</span></th></tr></thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <p id="empty" class="status" hidden>No leads match.</p>
+        <div class="pager"><button id="prev" class="link-btn" type="button">Previous</button><span id="pager-info" aria-live="polite"></span><button id="next" class="link-btn" type="button">Next</button></div>
+      </section>
+
+      <section id="chats-panel" hidden><div id="chats" style="margin-top:1rem"></div></section>
     </div>
   </main>
   <script src="admin.js"></script>
