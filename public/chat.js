@@ -134,7 +134,7 @@
     controller = new AbortController();
     let full = '';
     try {
-      const r = await fetch('http://localhost:3000/api/chat', {
+      const r = await fetch('/api/chat', {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: controller.signal,
         body: JSON.stringify({ messages: history.slice(-12).map(({ role, content }) => ({ role, content })), sessionId: sid })
       });
